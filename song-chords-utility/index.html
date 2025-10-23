@@ -27,6 +27,8 @@
         {C#m}You capture{A}d me today, Je{B}sus
         {C#m}You complete{A}d all my days,{B} ohooh.
 
+        @column_break
+
         [Chorus x2]
         @empty_line
         {E}It’s You that I am living for {A}
@@ -118,6 +120,11 @@
             column-fill: auto;
             column-count: 2;
             column-gap: 0.2in;
+            break-after: page;
+        }
+
+        .column-break {
+            break-after: column;
         }
 
         @media only print {
@@ -173,7 +180,6 @@
 <body>
 <div id="content"></div>
 <script type="text/javascript">
-    // TODO: column break token
     /** @type {HTMLElement} */
     const contentEl = document.getElementById("content");
     /** @type {HTMLElement} */
@@ -243,6 +249,7 @@
     const EMPTY_LINE = new LineParser(/@empty_line/, undefined, () => '<br/>');
     const PAGE_BREAK_TOKEN = '@page_break';
     const PAGE_BREAK = new LineParser(/@page_break/, undefined, value => value);
+    const COLUMN_BREAK = new LineParser(/@column_break/, undefined, () => '<div class="column-break"></div>');
     const TITLE = new LineParser(
         /@title:\s*(?<title>[^\n]+)/,
         'title',
@@ -261,7 +268,7 @@
     const INLINE_CHORDS = new LineParser(
         /@inline:\s*(?<inline_chords>[^\n]+)/,
         'inline_chords',
-        inlineChords => inlineChords && `<div class="inline chord">&nbsp;${inlineChords}</div>`
+        inlineChords => inlineChords && `<div class="inline chord">${inlineChords}</div>`
     );
     const EMBEDDED_CHORDS = new LineParser(
         /\{(?<chord_str>[^}]+)}/g,
@@ -279,6 +286,7 @@
     const lineParsers = [
         EMPTY_LINE,
         PAGE_BREAK,
+        COLUMN_BREAK,
         TITLE,
         ARTIST,
         SECTION_LABEL,
