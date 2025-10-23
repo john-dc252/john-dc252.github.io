@@ -4,7 +4,7 @@
     <script type="text" id="content-template">
         @title: I Know
         @artist: Liveloud
-        @break
+        @empty_line
 
         [Intro x2]
         @inline: E   A   C#m   A - B
@@ -129,126 +129,153 @@
     /** @type {string} */
     const template = templateEl.textContent.trim();
 
-    const TemplateTokens = {
-        BREAK: "@break",
-        TITLE: {
-            regexp: /@title:\s*(?<title>[^\n]+)/,
-            groups: {
-                title: "title",
-            },
-            /**
-             * @param {string} str
-             * @return {string | undefined}
-             */
-            tryTransform(str) {
-                const result = this.regexp.exec(str);
-                /** @type {string | undefined} */
-                const title = result?.groups[this.groups.title];
-                return title && `<div class="title">${title}</div>`;
-            },
-        },
-        ARTIST: {
-            regexp: /@artist:\s*(?<artist>[^\n]+)/,
-            groups: {
-                artist: "artist",
-            },
-            /**
-             * @param {string} str
-             * @return {string | undefined}
-             */
-            tryTransform(str) {
-                const result = this.regexp.exec(str);
-                /** @type {string | undefined} */
-                const artist =
-                    result?.groups[this.groups.artist];
-                return artist && `<div class="artist">${artist}</div>`;
-            },
-        },
-        INLINE_CHORDS: {
-            regexp: /@inline:\s*(?<inline_chords>[^\n]+)/,
-            groups: {
-                inlineChords: "inline_chords",
-            },
-            /**
-             * @param {string} str
-             * @return {string | undefined}
-             */
-            tryTransform(str) {
-                const result = this.regexp.exec(str);
-                /** @type {string | undefined} */
-                const inlineChords =
-                    result?.groups[this.groups.inlineChords];
-                return (
-                    inlineChords &&
-                    `<div class="inline chord">&nbsp;${inlineChords}</div>`
-                );
-            },
-        },
-        SECTION_LABEL: {
-            regexp: /\[(?<label_str>[^\]]+)]/g,
-            groups: {
-                labelStr: "label_str",
-            },
-            /**
-             * @param {string} str
-             * @return {string | undefined}
-             */
-            tryTransform(str) {
-                const result = this.regexp.exec(str);
-                /** @type {string | undefined} */
-                const label =
-                    result?.groups[this.groups.labelStr];
-                return label && `<div class="section-label">[${label}]</div>`;
-            },
-        },
-        EMBEDDED_CHORDS: {
-            regexp: /\{(?<chord_str>[^}]+)}/g,
-            groups: {
-                chordStr: "chord_str",
-            },
-            /**
-             * @param {string} str
-             */
-            tryTransform(str) {
-                const result = str.replaceAll(
-                    this.regexp,
-                    (m, p) => {
-                        console.log("@replaceAll", m, "-->", p);
-                        return `<span class="chord">${p}</span>`;
-                    },
-                );
-
-                return `<div class="line">${result}</div>`;
-            },
-        },
+    class LineParser {
         /**
-         * @param {string} str
+         * @readonly
+         * @type {RegExp}
+         */
+        regexp;
+        /**
+         * @readonly
+         * @type {string}
+         */
+        captureName;
+        /**
+         * @type {(string) => string}
+         */
+        htmlFromString;
+        /**
+         * @param {string} input
+         * @param {LineParser} parser
          * @return {string}
          */
-        tryTransform(str) {
-            return this.TITLE.tryTransform(str) ||
-                this.ARTIST.tryTransform(str) ||
-                this.INLINE_CHORDS.tryTransform(str) ||
-                this.SECTION_LABEL.tryTransform(str) ||
-                this.EMBEDDED_CHORDS.tryTransform(str)
+        extractValue = (input, parser) => {
+            const result = parser.regexp.exec(input);
+
+            if (result && !parser.captureName) {
+                // no value to extract, we will transform input to a fixed value
+                return input;
+            }
+
+            const value = result?.groups[parser.captureName];
+            return value ?? '';
+        };
+
+        /**
+         * @param {RegExp} regexp
+         * @param {string} [captureName]
+         * @param {(string) => string} htmlFromString
+         * @param {(i: string, p: LineParser) => string} [extractValue]
+         */
+        constructor(regexp, captureName, htmlFromString, extractValue = undefined) {
+            this.regexp = regexp;
+            this.captureName = captureName;
+            this.htmlFromString = htmlFromString;
+
+            if (extractValue) {
+                this.extractValue = extractValue;
+            }
         }
-    };
 
-    const splits = template.split("@break").map((e) => e.trim());
-    console.log("splits", splits);
+        /**
+         * @param {string} str
+         * @return {string} HTML string or empty string on failure
+         */
+        tryIntoHtml(str) {
+            const value = this.extractValue(str, this);
 
-    const htmlStr = splits
-        .map((split) => {
-            const lines = split
-                .split("\n")
-                .map((e) => e.trim())
-                .filter((s) => s.length > 0);
-            console.log("unprocessed:", lines);
-            const result = lines.map(line => TemplateTokens.tryTransform(line));
-            console.log("processed:", result);
-            return result.join("");
+            return value ? this.htmlFromString(value) : '';
+        }
+    }
+
+    const EMPTY_LINE = new LineParser(/@empty_line/, undefined, () => '<br/>');
+    const PAGE_BREAK = new LineParser(/@page_break/, undefined, value => value);
+    const TITLE = new LineParser(
+        /@title:\s*(?<title>[^\n]+)/,
+        'title',
+        title => title && `<div class="title">${title}</div>`
+    );
+    const ARTIST = new LineParser(
+        /@artist:\s*(?<artist>[^\n]+)/,
+        'artist',
+        artist => artist && `<div class="artist">${artist}</div>`
+    );
+    const SECTION_LABEL = new LineParser(
+        /\[(?<label_str>[^\]\n]+)]/,
+        'label_str',
+        label => label && `<div class="section-label">[${label}]</div>`
+    );
+    const INLINE_CHORDS = new LineParser(
+        /@inline:\s*(?<inline_chords>[^\n]+)/,
+        'inline_chords',
+        inlineChords => inlineChords && `<div class="inline chord">&nbsp;${inlineChords}</div>`
+    );
+    const EMBEDDED_CHORDS = new LineParser(
+        /\{(?<chord_str>[^}]+)}/g,
+        'chord_str',
+        result => `<div class="line">${result}</div>`,
+        (str, parser) => str.replaceAll(
+            parser.regexp,
+            (m, p) => {
+                console.log("@replaceAll", m, "-->", p);
+                return `<span class="chord">${p}</span>`;
+            },
+        )
+    );
+
+    const lineParsers = [
+        EMPTY_LINE,
+        PAGE_BREAK,
+        TITLE,
+        ARTIST,
+        SECTION_LABEL,
+        INLINE_CHORDS,
+        EMBEDDED_CHORDS,
+    ];
+
+    /**
+     * @param {string} str
+     */
+    function transformLineToHtml(str) {
+        // for (let parser of lineParsers) {
+        //     let result = parser.tryIntoHtml(str);
+        //
+        //     if (result) {
+        //         return result;
+        //     }
+        // }
+        //
+        // return '';
+
+        return lineParsers.reduce((acc, parser) => acc || parser.tryIntoHtml(str), '') ?? '';
+    }
+
+    // const splits = template.split("@break").map((e) => e.trim());
+    // console.log("splits", splits);
+
+    // const htmlStr = splits
+    //     .map((split) => {
+    //         const lines = split
+    //             .split("\n")
+    //             .map((e) => e.trim())
+    //             .filter((s) => s.length > 0);
+    //         console.log("unprocessed:", lines);
+    //         const result = lines.map(line => TemplateTokens.transformToHtml(line));
+    //         console.log("processed:", result);
+    //         return result.join("");
+    //     })
+    //     .join("<br/>");
+
+    const htmlStr = template.split('\n')
+        .map(line => line.trim())
+        .filter(s => s.length > 0)
+        .map(line => {
+            console.log('unprocessed line:', line);
+            const html = transformLineToHtml(line);
+            console.log('processed:', html);
+            return html;
         })
-        .join("<br/>");
+        .join("");
 
     contentEl.innerHTML = htmlStr;
 </script>
