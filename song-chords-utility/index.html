@@ -1,221 +1,217 @@
 <html lang="en">
-    <head>
-        <title>Song Chord Guide Sample</title>
-        <script type="text" id="content-template">
-            @title: Sample Title
-            @break
-            [Intro]
-            @inline: C G
-            [Verse 1]
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            @break
-            [Verse 2]
-            {A}V2 The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            @break
-            [Verse 3]
-            V3 The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            @break
-            [Verse 4]
-            V4 The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            @break
-            [Verse 5]
-            V5 The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-            The {C}quick brown {G}fox jumps {C#}over the lazy dog. The {C}quick brown {G}fox jumps {C#}over the lazy dog.
-        </script>
-        <!-- DO NOT CHANGE ANYTHING BEYOND THIS POINT UNLESS YOU KNOW WHAT YOU ARE DOING -->
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <style>
-            html,
-            body *:not(script) {
-                box-sizing: border-box;
-            }
+<head>
+    <title>Song Chord Guide Sample</title>
+    <script type="text" id="content-template">
+        @title: I Know
+        @artist: Liveloud
+        @break
 
-            body {
-                background: #333;
-                font-family: "monospace";
-                font-size: 10pt;
-            }
+        [Intro x2]
+        @inline: E   A   C#m   A - B
 
+        [Verse 1]
+        {E}I {Esus4}know You’ve given all I need  {A}
+        I know Your blessings never {C#m}end
+        I know that Your love is for{A}e---{B}ver
+
+        [Verse 2]
+        {E}I know that You are all I have  {A}
+        The only reason that I {C#m}live
+        The only reason that I f{A}ollow... o{B}hooh.
+
+        [Pre-Chorus]
+        {C#m}You capture{A}d me today, Je{B}sus
+        {C#m}You complete{A}d all my days,{B} ohooh.
+
+        [Chorus x2]
+        {E}It’s You that I am living for {A}
+        For You Lord I will worship {C#m}more
+        I will raise my hands and wors{A}hip, wo{B}rship You
+
+
+        [Intro]
+        [Verse 1]
+        [Verse 2]
+        [Chorus x2]
+        [Intro]
+
+        [Bridge x2]
+        {C#m}I am thank{A}ful for Your kindne{E}ss Lord  {B}
+        {C#m}I am thank{A}ful for You are bount{E}iful  {B}
+
+        [Pre-Chorus]
+        [Chorus x2]
+        [Intro x2]
+    </script>
+    <!-- DO NOT CHANGE ANYTHING BEYOND THIS POINT UNLESS YOU KNOW WHAT YOU ARE DOING -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <style>
+        html,
+        body *:not(script) {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #333;
+            font-family: "monospace";
+            font-size: 10pt;
+        }
+
+        #content {
+            background: #fff;
+            column-fill: auto;
+            column-count: 2;
+            column-gap: 0.2in;
+        }
+
+        @media only print {
+            @page {
+                margin: 0.5in;
+            }
+        }
+
+        @media only screen {
             #content {
-                background: #fff;
-                column-count: 2;
-                column-gap: 0.2in;
+                white-space: pre-wrap;
+                padding: 0.5in;
+                margin: 0 auto;
+                width: 8.5in;
+                min-height: 11in;
+                margin-top: 0.5in;
+                margin-bottom: 0.5in;
             }
+        }
 
-            @media only print {
-                @page {
-                    margin: 0.5in;
-                }
-            }
+        .title {
+            font-weight: bold;
+            text-decoration: underline;
+        }
 
-            @media only screen {
-                #content {
-                    padding: 0.5in;
-                    margin: 0 auto;
-                    width: 8.5in;
-                    /*height: 11in;*/
-                    margin-top: 0.5in;
-                    margin-bottom: 0.5in;
-                }
-            }
+        .artist {
+            font-weight: bold;
+        }
 
-            .title {
-                font-weight: bold;
-                text-decoration: underline;
-            }
+        .section-label {
+            line-height: 1.5rem;
+            break-after: avoid;
+        }
 
-            .section-label {
-                line-height: 1.5rem;
-                break-after: avoid;
-            }
+        .line {
+            position: relative;
+            line-height: 3rem;
+            break-inside: avoid-page;
+        }
 
-            .line {
-                position: relative;
-                line-height: 2.5rem;
-                break-inside: avoid-page;
-            }
+        .chord {
+            font-weight: bold;
+            position: absolute;
+            line-height: 1em;
+            /*transform: translateY(-1.3rem);*/
+        }
 
-            .chord {
-                font-weight: bold;
-                position: absolute;
-                font-size: 0.8em;
-                line-height: 1em;
-                /*transform: translateY(-1.3rem);*/
-            }
+        .chord.inline {
+            position: relative;
+            transform: none;
+        }
+    </style>
+</head>
 
-            .chord.inline {
-                position: relative;
-                transform: none;
-            }
-        </style>
-    </head>
+<body>
+<div id="content"></div>
+<script type="text/javascript">
+    // TODO: page break token
+    // TODO: column break token
+    /** @type {HTMLElement} */
+    const contentEl = document.getElementById("content");
+    /** @type {HTMLElement} */
+    const templateEl = document.getElementById("content-template");
+    /** @type {string} */
+    const template = templateEl.textContent.trim();
 
-    <body>
-        <div id="content"></div>
-        <script type="text/javascript">
-            /** @type {HTMLElement} */
-            const contentEl = document.getElementById("content");
-            /** @type {HTMLElement} */
-            const templateEl = document.getElementById("content-template");
-            /** @type {string} */
-            const template = templateEl.textContent.trim();
-
-            const TemplateTokens = {
-                BREAK: "@break",
-                TITLE: {
-                    regexp: /@title:\s*(?<title>[^\n]+)/,
-                    groups: {
-                        title: "title",
-                    },
-                },
-                INLINE: {
-                    regexp: /@inline:\s*(?<inline_chords>[^\n]+)/,
-                    groups: {
-                        inlineChords: "inline_chords",
-                    },
-                },
-                SECTION_LABEL: {
-                    regexp: /\[(?<label_str>[^\]]+)]/g,
-                    groups: {
-                        labelStr: "label_str",
-                    },
-                },
-                CHORD: {
-                    regexp: /\{(?<chord_str>[^}]+)}/g,
-                    groups: {
-                        chordStr: "chord_str",
-                    },
-                },
-            };
-
-            const splits = template.split("@break").map((e) => e.trim());
-            console.log("splits", splits);
-
-            const htmlStr = splits
-                .map((split) => {
-                    const lines = split
-                        .split("\n")
-                        .map((e) => e.trim())
-                        .filter((s) => s.length > 0);
-                    console.log("unprocessed:", lines);
-                    const result = lines.map(
-                        (line) =>
-                            tryGetTitle(line) ||
-                            tryGetInline(line) ||
-                            tryGetSectionLabel(line) ||
-                            tryGetLyrics(line),
-                    );
-                    console.log("processed:", result);
-                    return result.join("");
-                })
-                .join("<br/>");
-
-            contentEl.innerHTML = htmlStr;
-
+    const TemplateTokens = {
+        BREAK: "@break",
+        TITLE: {
+            regexp: /@title:\s*(?<title>[^\n]+)/,
+            groups: {
+                title: "title",
+            },
             /**
              * @param {string} str
              * @return {string | undefined}
              */
-            function tryGetTitle(str) {
-                const result = TemplateTokens.TITLE.regexp.exec(str);
+            tryTransform(str) {
+                const result = this.regexp.exec(str);
                 /** @type {string | undefined} */
-                const title = result?.groups[TemplateTokens.TITLE.groups.title];
+                const title = result?.groups[this.groups.title];
                 return title && `<div class="title">${title}</div>`;
-            }
-
+            },
+        },
+        ARTIST: {
+            regexp: /@artist:\s*(?<artist>[^\n]+)/,
+            groups: {
+                artist: "artist",
+            },
             /**
              * @param {string} str
              * @return {string | undefined}
              */
-            function tryGetInline(str) {
-                const result = TemplateTokens.INLINE.regexp.exec(str);
+            tryTransform(str) {
+                const result = this.regexp.exec(str);
+                /** @type {string | undefined} */
+                const artist =
+                    result?.groups[this.groups.artist];
+                return artist && `<div class="artist">${artist}</div>`;
+            },
+        },
+        INLINE_CHORDS: {
+            regexp: /@inline:\s*(?<inline_chords>[^\n]+)/,
+            groups: {
+                inlineChords: "inline_chords",
+            },
+            /**
+             * @param {string} str
+             * @return {string | undefined}
+             */
+            tryTransform(str) {
+                const result = this.regexp.exec(str);
                 /** @type {string | undefined} */
                 const inlineChords =
-                    result?.groups[TemplateTokens.INLINE.groups.inlineChords];
+                    result?.groups[this.groups.inlineChords];
                 return (
                     inlineChords &&
                     `<div class="inline chord">&nbsp;${inlineChords}</div>`
                 );
-            }
-
+            },
+        },
+        SECTION_LABEL: {
+            regexp: /\[(?<label_str>[^\]]+)]/g,
+            groups: {
+                labelStr: "label_str",
+            },
             /**
              * @param {string} str
              * @return {string | undefined}
              */
-            function tryGetSectionLabel(str) {
-                const result = TemplateTokens.SECTION_LABEL.regexp.exec(str);
+            tryTransform(str) {
+                const result = this.regexp.exec(str);
                 /** @type {string | undefined} */
                 const label =
-                    result?.groups[
-                        TemplateTokens.SECTION_LABEL.groups.labelStr
-                    ];
+                    result?.groups[this.groups.labelStr];
                 return label && `<div class="section-label">[${label}]</div>`;
-            }
-
+            },
+        },
+        EMBEDDED_CHORDS: {
+            regexp: /\{(?<chord_str>[^}]+)}/g,
+            groups: {
+                chordStr: "chord_str",
+            },
             /**
              * @param {string} str
-             * @return {string}
              */
-            function tryGetLyrics(str) {
+            tryTransform(str) {
                 const result = str.replaceAll(
-                    TemplateTokens.CHORD.regexp,
+                    this.regexp,
                     (m, p) => {
                         console.log("@replaceAll", m, "-->", p);
                         return `<span class="chord">${p}</span>`;
@@ -223,7 +219,38 @@
                 );
 
                 return `<div class="line">${result}</div>`;
-            }
-        </script>
-    </body>
+            },
+        },
+        /**
+         * @param {string} str
+         * @return {string}
+         */
+        tryTransform(str) {
+            return this.TITLE.tryTransform(str) ||
+                this.ARTIST.tryTransform(str) ||
+                this.INLINE_CHORDS.tryTransform(str) ||
+                this.SECTION_LABEL.tryTransform(str) ||
+                this.EMBEDDED_CHORDS.tryTransform(str)
+        }
+    };
+
+    const splits = template.split("@break").map((e) => e.trim());
+    console.log("splits", splits);
+
+    const htmlStr = splits
+        .map((split) => {
+            const lines = split
+                .split("\n")
+                .map((e) => e.trim())
+                .filter((s) => s.length > 0);
+            console.log("unprocessed:", lines);
+            const result = lines.map(line => TemplateTokens.tryTransform(line));
+            console.log("processed:", result);
+            return result.join("");
+        })
+        .join("<br/>");
+
+    contentEl.innerHTML = htmlStr;
+</script>
+</body>
 </html>
