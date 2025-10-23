@@ -48,6 +48,55 @@
         [Pre-Chorus]
         [Chorus x2]
         [Intro x2]
+
+        @page_break
+
+        @title: I Know
+        @artist: Liveloud
+        @empty_line
+
+        [Intro x2]
+        @inline: E   A   C#m   A - B
+        @empty_line
+
+        [Verse 1]
+        @empty_line
+        {E}I {Esus4}know You’ve given all I need  {A}
+        I know Your blessings never {C#m}end
+        I know that Your love is for{A}e---{B}ver
+
+        [Verse 2]
+        @empty_line
+        {E}I know that You are all I have  {A}
+        The only reason that I {C#m}live
+        The only reason that I f{A}ollow... o{B}hooh.
+
+        [Pre-Chorus]
+        @empty_line
+        {C#m}You capture{A}d me today, Je{B}sus
+        {C#m}You complete{A}d all my days,{B} ohooh.
+
+        [Chorus x2]
+        @empty_line
+        {E}It’s You that I am living for {A}
+        For You Lord I will worship {C#m}more
+        I will raise my hands and wors{A}hip, wo{B}rship You
+
+
+        [Intro]
+        [Verse 1]
+        [Verse 2]
+        [Chorus x2]
+        [Intro]
+
+        [Bridge x2]
+        @empty_line
+        {C#m}I am thank{A}ful for Your kindne{E}ss Lord  {B}
+        {C#m}I am thank{A}ful for You are bount{E}iful  {B}
+
+        [Pre-Chorus]
+        [Chorus x2]
+        [Intro x2]
     </script>
     <!-- DO NOT CHANGE ANYTHING BEYOND THIS POINT UNLESS YOU KNOW WHAT YOU ARE DOING -->
     <meta charset="UTF-8"/>
@@ -64,7 +113,7 @@
             font-size: 10pt;
         }
 
-        #content {
+        .page {
             background: #fff;
             column-fill: auto;
             column-count: 2;
@@ -78,14 +127,12 @@
         }
 
         @media only screen {
-            #content {
+            .page {
                 white-space: pre-wrap;
                 padding: 0.5in;
-                margin: 0 auto;
                 width: 8.5in;
-                min-height: 11in;
-                margin-top: 0.5in;
-                margin-bottom: 0.5in;
+                height: 11in;
+                margin: 0.5in auto;
             }
         }
 
@@ -126,7 +173,6 @@
 <body>
 <div id="content"></div>
 <script type="text/javascript">
-    // TODO: page break token
     // TODO: column break token
     /** @type {HTMLElement} */
     const contentEl = document.getElementById("content");
@@ -195,6 +241,7 @@
     }
 
     const EMPTY_LINE = new LineParser(/@empty_line/, undefined, () => '<br/>');
+    const PAGE_BREAK_TOKEN = '@page_break';
     const PAGE_BREAK = new LineParser(/@page_break/, undefined, value => value);
     const TITLE = new LineParser(
         /@title:\s*(?<title>[^\n]+)/,
@@ -246,7 +293,7 @@
         return lineParsers.reduce((acc, parser) => acc || parser.tryIntoHtml(str), '') ?? '';
     }
 
-    const htmlStr = template.split('\n')
+    const intermediateStr = template.split('\n')
         .map(line => line.trim())
         .filter(s => s.length > 0)
         .map(line => {
@@ -256,6 +303,10 @@
             return html;
         })
         .join("");
+
+    const htmlStr = intermediateStr.split(PAGE_BREAK_TOKEN)
+        .map(page => `<div class="page">${page}</div>`)
+        .join('');
 
     contentEl.innerHTML = htmlStr;
 </script>
