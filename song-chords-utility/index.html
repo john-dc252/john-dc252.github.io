@@ -243,34 +243,8 @@
      * @param {string} str
      */
     function transformLineToHtml(str) {
-        // for (let parser of lineParsers) {
-        //     let result = parser.tryIntoHtml(str);
-        //
-        //     if (result) {
-        //         return result;
-        //     }
-        // }
-        //
-        // return '';
-
         return lineParsers.reduce((acc, parser) => acc || parser.tryIntoHtml(str), '') ?? '';
     }
-
-    // const splits = template.split("@break").map((e) => e.trim());
-    // console.log("splits", splits);
-
-    // const htmlStr = splits
-    //     .map((split) => {
-    //         const lines = split
-    //             .split("\n")
-    //             .map((e) => e.trim())
-    //             .filter((s) => s.length > 0);
-    //         console.log("unprocessed:", lines);
-    //         const result = lines.map(line => TemplateTokens.transformToHtml(line));
-    //         console.log("processed:", result);
-    //         return result.join("");
-    //     })
-    //     .join("<br/>");
 
     const htmlStr = template.split('\n')
         .map(line => line.trim())
