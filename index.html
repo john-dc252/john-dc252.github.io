@@ -3,146 +3,18 @@
     <title>john-dc252's Web Apps</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-        :root {
-            --text-color: #fff;
-            --shadow: 0.5rem 0.5rem 1rem #111;
-            --border-radius: 1rem;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: #333;
-            font-family: 'ui-monospace', 'monospace';
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .wrapper {
-            height: 100%;
-            margin: 0 1rem;
-            padding-top: 10vh;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 0 auto;
-            padding: 4rem;
-        }
-
-        .wrapper .header {
-            font-size: 180%;
-            margin: 0;
-            padding: 1rem 2rem;
-            width: 100%;
-            background: #58f;
-            border-radius: var(--border-radius);
-        }
-
-        .app-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            height: 10rem;
-            width: 100%;
-            font-weight: bolder;
-            text-align: center;
-            color: var(--text-color);
-            background: #4c4a4a;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-            transition: 0.1s ease-in-out;
-        }
-
-        .app-link:hover, .app-link:focus {
-            transform: scale(1.3);
-        }
-
-        .app-link:link {
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        @media only screen and (min-width: 576px) {
-            .app-link {
-                width: 20rem;
-            }
-        }
-
-        @media only screen and (min-width: 1024px) {
-            .wrapper {
-                margin: 0 auto;
-                width: 80%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/main.css"/>
+    <script src="./assets/js/main.mjs" type="module"></script>
 </head>
 <body>
 <div class="wrapper">
     <h3 class="header">Apps</h3>
     <div class="container"></div>
 </div>
-<script>
-    main().then();
+<script type="module">
+import {init} from "./assets/js/main.mjs";
 
-    async function main() {
-        const response = await fetch('app-dir-list.json');
-        /**
-         * @type {string[]}
-         */
-        const appDirList = await response.json();
-
-        const docFragment = new DocumentFragment();
-        for (const appDir of appDirList) {
-            docFragment.append(createLink(appDir));
-        }
-
-        document.querySelector('.container').appendChild(docFragment);
-    }
-
-    /**
-     * @param {string} appDir
-     */
-    function createLink(appDir) {
-        return createElement('a', {class: 'app-link', href: appDir, target: '_blank'}, [
-            createElement('strong', {}, [appDir.replaceAll('-', ' ')]),
-        ]);
-    }
-
-    /**
-     * @param {string} el
-     * @param {{[k: string]: any}} attrs
-     * @param {(Node|string)[]} children
-     * @return {Node}
-     */
-    function createElement(el, attrs, children) {
-        const domEl = document.createElement(el);
-        for (const attr in attrs) {
-            domEl.setAttribute(attr, attrs[attr]);
-        }
-
-        for (const child of children) {
-            domEl.append(child);
-        }
-
-        return domEl;
-    }
+init();
 </script>
 </body>
 </html>

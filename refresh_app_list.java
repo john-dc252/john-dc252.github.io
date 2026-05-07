@@ -3,7 +3,7 @@ import java.io.IOException;
 
 void main() throws Exception {
     IO.println("Getting app dir list...");
-    final var currentDir = Paths.get("");
+    final var currentDir = Paths.get("apps");
     final var pathList = Files.list(currentDir)
             .filter(Files::isDirectory)
             .filter(Predicate.not(t -> {
