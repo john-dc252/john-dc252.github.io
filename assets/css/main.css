@@ -28,6 +28,7 @@ body {
     padding-top: 10vh;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .container {
@@ -59,6 +60,7 @@ body {
     height: 10rem;
     width: 100%;
     font-weight: bolder;
+    font-size: 20pt;
     text-align: center;
     color: var(--text-color);
     background: #4c4a4a;
@@ -74,6 +76,24 @@ body {
 .app-link:link {
     text-decoration: none;
     color: var(--text-color);
+}
+
+.busy-indicator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10vh 0 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+}
+
+.busy.busy-indicator-container {
+    opacity: 1;
+    visibility: visible;
 }
 
 @media only screen and (min-width: 576px) {

@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+html, body, *:not(script, head, head *) {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+    background: #333;
+}
+
+.component-container {
+    width: 8rem;
+    height: 6rem;
+    background: #333;
+    border: thin solid #000;
+    overflow: hidden;
+    position: relative;
+    border-radius: 30%;
+}
+
+.animatable-obj {
+    height: 100%;
+    display: inline-block;
+    width: 33%;
+    background: #779;
+    position: absolute;
+    animation: animation1 3s linear infinite;
+}
+
+.animatable-obj2 {
+    background: #fff;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 30%;
+    animation: animation2 1s linear infinite;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 3rem;
+}
+
+.component-label {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.busy-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes animation1 {
+    0% {
+        margin-left: -66%;
+    }
+
+    100% {
+        margin-left: 100%;
+    }
+}
+
+@keyframes animation2 {
+    0% {
+        transform: rotateZ(0deg);
+        margin-top: 37%;
+        margin-left: -60%;
+    }
+
+    20% {
+        transform: rotateZ(270deg);
+        margin-top: -33%;
+        margin-left: 50%;
+    }
+
+    40% {
+        transform: rotateZ(360deg);
+        margin-top: 37%;
+        margin-left: 60%;
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+        margin-top: 37%;
+        margin-left: -33%;
+    }
+}
