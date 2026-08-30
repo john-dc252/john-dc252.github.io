@@ -1,1 +1,0 @@
-import{S as e,p as t}from"./web-Cz_YMZoq.js";var n=e(`<main class="px-4 py-12"><h1 class="my-4 text-4xl font-bold">Users`);function r(e){var r=n();return r.firstChild,t(r,()=>e.children,null),r}export{r as default};
