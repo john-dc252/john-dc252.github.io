@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0d6efd"><meta name="description" content="Offline-capable Savings Tracker built with SolidJS 2.0 and TypeScript"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Savings Tracker"><link rel="icon" href="/apps/savings-tracker/favicon.ico"><link rel="icon" type="image/svg+xml" href="/apps/savings-tracker/icon.svg"><link rel="apple-touch-icon" href="/apps/savings-tracker/icon.svg"><link rel="manifest" href="/apps/savings-tracker/manifest.webmanifest"><title>Savings Tracker</title><script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0d6efd"><meta name="description" content="Offline-capable Savings Tracker built with SolidJS 2.0 and TypeScript"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Savings Tracker"><link rel="icon" href="/apps/savings-tracker/favicon.ico"><link rel="icon" type="image/svg+xml" href="/apps/savings-tracker/icon.svg"><link rel="apple-touch-icon" href="/apps/savings-tracker/apple-touch-icon.png"><link rel="manifest" href="/apps/savings-tracker/manifest.webmanifest"><title>Savings Tracker</title><script>
             (() => {
               try {
                 const saved = localStorage.getItem('savings-tracker-theme');
@@ -8,4 +8,16 @@
                 }
               } catch (e) {}
             })();
-          </script><link rel="stylesheet" href="/apps/savings-tracker/assets/virtual_solid-ssr-entry-client-BZA3ijVb.css"><script type="module" src="/apps/savings-tracker/assets/virtual_solid-ssr-entry-client-BXHCND40.js"></script></head><body class="bg-body text-body vh-100 vw-100 overflow-hidden d-flex flex-column m-0 p-0"></body></html>
+          </script><script>
+            window.addEventListener('error', (e) => {
+              if (e.target && (e.target.tagName === 'SCRIPT' || e.target.tagName === 'LINK')) {
+                const key = 'pwa_asset_retry';
+                const last = sessionStorage.getItem(key);
+                const now = Date.now();
+                if (!last || now - parseInt(last, 10) > 10000) {
+                  sessionStorage.setItem(key, now.toString());
+                  window.location.reload();
+                }
+              }
+            }, true);
+          </script><link rel="stylesheet" href="/apps/savings-tracker/assets/virtual_solid-ssr-entry-client-DnFT7Sc5.css"><script type="module" src="/apps/savings-tracker/assets/virtual_solid-ssr-entry-client-B9gim3YV.js"></script></head><body class="bg-body text-body vh-100 vw-100 overflow-hidden d-flex flex-column m-0 p-0"></body></html>
